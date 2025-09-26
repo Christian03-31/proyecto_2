@@ -5,4 +5,30 @@
 <Body>
     <a href="/"><h1>Regresar</h1></a>
     
+    <form method="post" action="">
+        <!-- Campo: Nombre del propietario -->
+        <label for="nombre_propietario">Nombre del tutor:</label><br>
+        <input type="text" id="nombre_propietario" name="nombre_propietario" required><br><br>
+    
+        <!-- Campo: RUT del propietario -->
+        <label for="rut_propietario">RUT del tutor:</label><br>
+        <input type="text" id="rut_propietario" name="rut_propietario" placeholder="Ej: 12345678K" required><br><br>
+    
+        <!-- Campo: Tipo de mascota -->
+        <label for="tipo_mascota">Tipo de mascota:</label><br>
+        <select id="tipo_mascota" name="tipo_mascota" required>
+            <option value="">-- Selecciona una opción --</option>
+            <option value="perro">Perro</option>
+            <option value="gato">Gato</option>
+        </select><br><br>
+    
+        <!-- Campo: Nombre de la mascota -->
+        <label for="nombre_mascota">Nombre de la mascota:</label><br>
+        <input type="text" id="nombre_mascota" name="nombre_mascota" required><br><br>
+    
+        <!-- Botón de envío -->
+        <button type="submit">Enviar</button>
+    </form>
+    
+    
 </Body>

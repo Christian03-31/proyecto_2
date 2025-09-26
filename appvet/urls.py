@@ -8,4 +8,5 @@ urlpatterns = [
     path('Trabajadores/', views.pagtrabajadores),
     path('Admin/', views.pagadmin),
     path('Revisar/', views.pagrev_hora),
+
 ]
