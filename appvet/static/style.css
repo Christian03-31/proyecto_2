@@ -1,0 +1,42 @@
+
+.tomahora { background-color: blue;
+
+  .carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .carousel__slide {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+    position: relative;
+  }
+
+  .carousel__slide img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+
+  .carousel__navigation {
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .carousel__navigation-button {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+
+  .carousel__navigation-button:hover {
+    background-color: #0056b3;
+  }
