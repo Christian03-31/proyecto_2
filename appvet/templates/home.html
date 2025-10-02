@@ -7,10 +7,10 @@
 <body>
     <div class="tomahora">
     <a href="/Pedido"><h1>Tome su hora</h1></a>
-    <a href="/Paciente"><h1>Ingreso paciente</h1></a>
-    <a href="/Trabajadores"><h1>Ingreso para trabajador</h1></a>
+    <a href="{% url 'login_paciente' %}"><h1>Ingreso paciente</h1></a>
+    <a href="{% url 'login_trabajador' %}"><h1>Ingreso para trabajador</h1></a>
     <a href="/Revisar"><h1>Revision de su hora</h1></a>
-    <a href="/Admin"><h1>Administrador</h1></a>
+    <a href="{% url 'login_admin' %}"><h1>Administrador</h1></a>
     </div>
 
 
