@@ -1,7 +1,28 @@
 <head>
-    <title>Rwevision de Hora</title>
+    <meta charset="UTF-8">
+    <title>Revisión de Hora</title>
+    
 </head>
+<body>
+    <a href="{% url 'paciente' %}">← Regresar</a>
+    <h2>Mis citas agendadas</h2>
+    {{ UserVeterinaria.username }}
 
-<Body>
-    <a href="{% url 'paciente' %}"><h1>Regresar</h1></a>
-</Body>
+        <ul>
+            {% for c in citas %}
+                <li>
+                    <strong>Fecha:</strong> {{ c.fecha_cita }}<br>
+                    <strong>Hora:</strong> {{ c.hora_cita }}<br>
+                    <strong>Nombre Mascota:</strong> {{ c.nombre_mascota }}<br>
+                    <strong>Tipo Mascota:</strong> {{ c.tipo_mascota }}<br>
+
+                    <form method="post" style="margin-top: 10px;">
+                        {% csrf_token %}
+                        <input type="hidden" name="cita_id" value="{{ c.id }}">
+                        <button type="submit">Eliminar cita</button>
+                    </form>
+                </li>
+                <hr>
+            {% endfor %}
+        </ul>
+</body>

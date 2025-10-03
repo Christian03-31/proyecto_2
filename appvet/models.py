@@ -15,6 +15,7 @@ class Cita(models.Model):
     nombre_mascota = models.CharField(max_length=100)
     fecha_cita = models.DateField()
     hora_cita = models.TimeField()
+    propietario = models.ForeignKey(UserVeterinaria, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return f"{self.nombre_mascota} ({self.fecha_cita} a las {self.hora_cita})"

@@ -6,7 +6,17 @@ from django.http import HttpResponseRedirect
 from .models import Cita
 
 
+@login_required(login_url="/login_paciente")
+def pagrev_hora(request):
+    citas = Cita.objects.all()  # O usa otro campo si lo prefieres
 
+    if request.method == 'POST':
+        cita_id = request.POST.get('cita_id')
+        Cita.objects.filter(id=cita_id).delete()
+        return redirect('revisar')
+
+    return render(request, 'revision_hora.html', {'citas': citas,
+                                                  'UserVeterinaria': request.user})
 
 #Esta seccion es para iniciar sesion
 def login_admin(request):
@@ -36,7 +46,7 @@ def login_paciente(request):
         return render(request, 'logins/login_paciente.html')
     else:
         user = authenticate(request, username=request.POST['username'], password=request.POST['password'])
-        if user is not None and user.es_cliente:
+        if user is not None and user.es_cliente or user.is_staff:
             print("Usuario existe")
             login(request, user)
             return redirect('paciente')
@@ -44,7 +54,6 @@ def login_paciente(request):
             print("Usuario existe y es trabajador")
             return redirect('login_trabajador')
         print("Usuario no existe")
-        return render(request, 'logins/login_paciente.html')
 # ELIMINAR LOS PRINT
 
 
@@ -99,14 +108,17 @@ def pagpedir_hora(request):
             tipo_mascota=request.POST.get('tipo_mascota'),
             nombre_mascota=request.POST.get('nombre_mascota'),
             fecha_cita=fecha,
-            hora_cita=hora
+            hora_cita=hora,
+            propietario=request.user  # Aquí va el usuario que está logueado
         )
         return HttpResponseRedirect('/')
     return render(request, 'pedir_hora.html', {'horas_disponibles': horas_disponibles})
 
 @login_required(login_url="/login_paciente")
 def pagpaciente(request):
-    return render(request, 'ingreso_paciente.html')
+    return render(request, 'ingreso_paciente.html', {
+        'UserVeterinaria': request.user
+    })
 
 def pagadmin(request):
     return render(request, 'admin.html')
@@ -116,7 +128,9 @@ def pagrev_hora(request):
     return render(request, 'revision_hora.html')
 
 def pagtrabajadores(request):
-    return render(request, 'trabajadores.html')
+    return render(request, 'trabajadores.html', {
+        'UserVeterinaria': request.user
+        })
 
 # Create your views here.
 
