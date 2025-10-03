@@ -7,3 +7,11 @@ pagina web para veterinaria donde podamos atender solo a perros y gatos con prev
 3.- cuenta para trabajadores, historial de pacientes
 4.- front para trabajadores
 5.- manejo de horas. si es que podemos.
+
+Usuarios y contraseñas:
+Trabajador: 
+misael
+asdasdqwe
+Cliente:
+roberto
+1234asdfqwe
