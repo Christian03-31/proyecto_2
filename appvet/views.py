@@ -6,17 +6,7 @@ from django.http import HttpResponseRedirect
 from .models import Cita
 
 
-@login_required(login_url="/login_paciente")
-def pagrev_hora(request):
-    citas = Cita.objects.all()  # O usa otro campo si lo prefieres
 
-    if request.method == 'POST':
-        cita_id = request.POST.get('cita_id')
-        Cita.objects.filter(id=cita_id).delete()
-        return redirect('revisar')
-
-    return render(request, 'revision_hora.html', {'citas': citas,
-                                                  'UserVeterinaria': request.user})
 
 #Esta seccion es para iniciar sesion
 def login_admin(request):
@@ -135,4 +125,15 @@ def pagtrabajadores(request):
 # Create your views here.
 
 
+@login_required(login_url="/login_paciente")
+def pagrev_hora(request):
+    print("hola")
+    citas =  Cita.objects.filter(propietario=request.user)
+    print("citas encontradas: ", citas.count()) # O usa otro campo si lo prefieres
 
+    if request.method == 'POST':
+        cita_id = request.POST.get('cita_id')
+        Cita.objects.filter(id=cita_id).delete()
+        return redirect('revisar')
+
+    return render(request, 'revision_hora.html', {'citas': citas})
