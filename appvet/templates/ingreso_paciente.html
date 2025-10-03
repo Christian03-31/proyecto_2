@@ -4,4 +4,9 @@
 
 <Body>
     <a href="/"><h1>Regresar</h1></a>
+    <a href="{% url 'pedir' %}">Pedir hora</a>
+    <a href="{% url 'revisar' %}">Revisar hora</a>
+    <a href="{% url 'logoutP' %}">Salir</a>
+    <h1>Bienvenido Paciente {{ UserVeterinaria.username }}</h1>
+
 </Body>

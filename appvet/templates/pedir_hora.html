@@ -3,29 +3,48 @@
 </head>
 
 <Body>
-    <a href="/"><h1>Regresar</h1></a>
+    <a href="{% url 'paciente' %}"><h1>Regresar</h1></a>
     
     <form method="post" action="">
+        {% csrf_token %}
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
         <!-- Campo: Nombre del propietario -->
-        <label for="nombre_propietario">Nombre del tutor:</label><br>
-        <input type="text" id="nombre_propietario" name="nombre_propietario" required><br><br>
-    
+        <label for="nombre_propietario">Nombre del tutor:</label>
+        <input type="text" id="nombre_propietario" name="nombre_propietario" required>
+
         <!-- Campo: RUT del propietario -->
-        <label for="rut_propietario">RUT del tutor:</label><br>
-        <input type="text" id="rut_propietario" name="rut_propietario" placeholder="Ej: 12345678K" required><br><br>
-    
+        <label for="rut_propietario">RUT del tutor:</label>
+        <input type="text" id="rut_propietario" name="rut_propietario" placeholder="Ej: 12345678K" required>
+
         <!-- Campo: Tipo de mascota -->
-        <label for="tipo_mascota">Tipo de mascota:</label><br>
+        <label for="tipo_mascota">Tipo de mascota:</label>
         <select id="tipo_mascota" name="tipo_mascota" required>
             <option value="">-- Selecciona una opción --</option>
             <option value="perro">Perro</option>
             <option value="gato">Gato</option>
-        </select><br><br>
-    
+        </select>
+
         <!-- Campo: Nombre de la mascota -->
-        <label for="nombre_mascota">Nombre de la mascota:</label><br>
-        <input type="text" id="nombre_mascota" name="nombre_mascota" required><br><br>
-    
+        <label for="nombre_mascota">Nombre de la mascota:</label>
+        <input type="text" id="nombre_mascota" name="nombre_mascota" required>
+
+        <!-- Campo: Fecha de la cita -->
+        <label for="fecha_cita">Fecha de la cita:</label>
+        <input type="date" id="fecha_cita" name="fecha_cita" required>
+
+        <!-- Campo: Hora de la cita -->
+        <label for="hora_cita">Hora de la cita:</label>
+        <select id="hora_cita" name="hora_cita" required>
+            <option value="">-- Selecciona una hora --</option>
+            {% for hora in horas_disponibles %}
+                <option value="{{ hora }}">{{ hora }}</option>
+            {% endfor %}
+        </select>
+
         <!-- Botón de envío -->
         <button type="submit">Enviar</button>
     </form>
