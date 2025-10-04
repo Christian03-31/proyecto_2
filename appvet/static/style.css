@@ -1,7 +1,33 @@
 
 .tomahora {
-  background-color: wheat;
+    background-color: #D4CEB4;
+    display: flex;             
+    flex-wrap: wrap;          
+    gap: 1rem;                
+    justify-content: center;  
+    align-items: center;      
+    padding: 0.75rem;         
 }
+
+.tomahora a {
+    text-decoration: none;
+    color: inherit;           
+    display: inline-block;
+}
+
+.tomahora a h1 {
+    margin: 0;                
+    font-size: 1rem;        
+    font-weight: 600;
+    padding: 0.4rem 0.9rem;   
+    border-radius: 6px;
+    background: transparent;  
+}
+
+.tomahora a:hover h1 {
+    background: rgba(0,0,0,0.05);
+}
+
 
 
 
@@ -12,17 +38,50 @@
     scroll-behavior: smooth;
     gap: 1rem;
     padding: 1rem;
+    /* limitar ancho máximo y centrar */
+    max-width: 100%;
+    margin: 0 auto;
+    background-color:#D4CEB4;
+}
+
+/* Contenedor para colocar el carrusel a la izquierda y el mapa a la derecha */
+.content-row {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    justify-content: center;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.content-row .carousel {
+    flex: 1 1 60%; /* carrusel ocupa el espacio disponible */
+}
+
+.content-row .maps, .content-row #map {
+    flex: 0 0 320px; /* ancho fijo para el mapa */
+    width: 320px;
+    height: 400px;
+}
+
+@media (max-width: 900px) {
+    .content-row { flex-direction: column; }
+    .content-row .maps, .content-row #map { width: 100%; max-width: 700px; height: 300px; }
 }
 
 .carousel__slide {
     flex: 0 0 100%;
     scroll-snap-align: center;
     position: relative;
+    /* limitar tamaño del slide para que respete el max-width del contenedor */
+    max-width: 1600px;
+    height: 400px; /* altura fija para obtener un carrusel más pequeño */
 }
 
 .carousel__slide img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover; /* recorta la imagen para rellenar sin deformarla */
     border-radius: 5px;
 }
 
@@ -35,12 +94,56 @@
     display: inline-block;
     margin: 5px;
     padding: 0.5rem 1rem;
-    background-color: #007bff;
-    color: white;
+    background-color: #1e5553;
     text-decoration: none;
     border-radius: 5px;
 }
 
 .carousel__navigation-button:hover {
-    background-color: #0056b3;
+    background-color: #85A9A7;
+}
+
+.encabezado {
+    background-color:#85A9A7 ;
+    /* centrar contenido (imagen) */
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    padding: 0.75rem 0;
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+}
+
+.vetCom {
+    display: block;
+    width: 250px;       
+    height: auto;        
+    max-height: 200px;  
+    object-fit: contain; 
+    margin: 0 auto; 
+  
+}
+
+@media (max-width: 480px) {
+    .vetCom, .vet_com {
+        width: 80px;
+        max-height: 80px;
+    }
+}
+
+.contenedor-maps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 150px;
+    margin-bottom: 50px;
+}
+
+#map {
+    width: 400px;
+    height: 400px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
