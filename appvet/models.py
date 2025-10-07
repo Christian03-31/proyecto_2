@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 
 # Create your models here.
 
@@ -16,6 +17,18 @@ class Cita(models.Model):
     fecha_cita = models.DateField()
     hora_cita = models.TimeField()
     propietario = models.ForeignKey(UserVeterinaria, on_delete=models.CASCADE, null=True, blank=True)
+
+    trabajador_asignado = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='citas_asignadas'
+    )
+
+    def esta_tomada(self):
+        return self.trabajador_asignado is not None
+
 
     def __str__(self):
         return f"{self.nombre_mascota} ({self.fecha_cita} a las {self.hora_cita})"

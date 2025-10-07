@@ -137,3 +137,22 @@ def pagrev_hora(request):
         return redirect('revisar')
 
     return render(request, 'revision_hora.html', {'citas': citas})
+
+
+@login_required
+def panel_trabajador(request):
+    citas = Cita.objects.all().order_by('fecha_cita', 'hora_cita')
+    print("citas encontradas: ", Cita.objects.count())
+
+    if request.method == 'POST':
+        cita_id = request.POST.get('cita_id')
+        cita = Cita.objects.get(id=cita_id)
+
+        if not cita.trabajador_asignado:
+            cita.trabajador_asignado = request.user
+            cita.save()
+
+    return render(request, 'trabajadores.html', {
+        'UserVeterinaria': request.user,
+        'citas': citas
+    })

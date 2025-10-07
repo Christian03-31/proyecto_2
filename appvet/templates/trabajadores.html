@@ -2,8 +2,32 @@
     <title>TRABAJADORES</title>
 </head>
 
-<Body>
-    <a href="/"><h1>Regresar</h1></a>
-    <a href="{% url 'logoutT' %}">Salir</a>
-    <h1>Bienvenido trabajador {{ UserVeterinaria.username }}</h1>
-</Body>
+<body>
+  <a href="/"><h1>Regresar</h1></a>
+  <a href="{% url 'logoutT' %}">Salir</a>
+  <h1>Bienvenido trabajador {{ UserVeterinaria.username }}</h1>
+
+  <h2>Citas disponibles</h2>
+  <ul>
+    {% for cita in citas %}
+      <li>
+        <strong>Fecha:</strong> {{ cita.fecha_cita }}<br>
+        <strong>Hora:</strong> {{ cita.hora_cita }}<br>
+        <strong>Mascota:</strong> {{ cita.nombre_mascota }} ({{ cita.tipo_mascota }})<br>
+        <strong>Tutor:</strong> {{ cita.nombre_propietario }} - {{ cita.rut_propietario }}<br>
+
+        {% if cita.trabajador_asignado %}
+          <p><strong>Asignada a:</strong> {{ cita.trabajador_asignado.username }}</p>
+        {% else %}
+          <form method="post" style="margin-top: 10px;">
+            {% csrf_token %}
+            <input type="hidden" name="cita_id" value="{{ cita.id }}">
+            <button type="submit">Tomar esta cita</button>
+          </form>
+        {% endif %}
+      </li>
+      <hr>
+    {% endfor %}
+  </ul>
+</body>
+
