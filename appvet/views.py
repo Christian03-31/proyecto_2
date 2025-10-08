@@ -4,6 +4,9 @@ from django.contrib.auth.decorators import login_required
 from datetime import datetime, timedelta
 from django.http import HttpResponseRedirect
 from .models import Cita
+from .serializers import CitaSerializer
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 
 
@@ -156,3 +159,35 @@ def panel_trabajador(request):
         'UserVeterinaria': request.user,
         'citas': citas
     })
+
+
+
+#@login_required(login_url="/login_trabajador")
+@api_view(['GET', 'POST'])
+def saludo(request):
+    citas = Cita.objects.all()
+    citas_serializadas = CitaSerializer(citas, many=True).data
+    try:
+        print("Citas encontradas: ", Cita.objects.count())
+        if request.method == 'POST':
+            # Aquí puedes manejar los datos enviados en la solicitud POST
+            data = request.data
+            Cita.objects.create(
+                nombre_propietario=data.get('nombre_propietario'),
+                rut_propietario=data.get('rut_propietario'),
+                tipo_mascota=data.get('tipo_mascota'),
+                nombre_mascota=data.get('nombre_mascota'),
+                fecha_cita=data.get('fecha_cita'),
+                hora_cita=data.get('hora_cita'),
+                propietario=None  # Aquí va el usuario que está logueado
+            )
+            # Procesa los datos según sea necesario
+            return Response({"mensaje": "Datos recibidos", "datos": data})
+    except Exception as e:
+        print("Error al contar citas: ", str(e))
+
+    return Response({
+        "mensaje": "¡Hola desde tu API!",
+        "citas": citas_serializadas
+    })
+

@@ -14,7 +14,7 @@ urlpatterns = [
     path('logout_paciente/', views.logout_PACIENTE, name='logoutP'),
     path('logout_trabajador/', views.logout_trabajador, name='logoutT'),
     path('Trabajadores/', views.panel_trabajador, name='trabajador'),
-
+    path('api/saludo/', views.saludo, name='API')
 
 
 ]
