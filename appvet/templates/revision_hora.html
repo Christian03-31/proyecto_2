@@ -1,6 +1,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Revisión de Hora</title>
+    <link rel="stylesheet" href="/static/style_revhora.css">
     
 </head>
 <body>
@@ -8,6 +9,23 @@
     <h2>Mis citas agendadas</h2>
     {{ UserVeterinaria.username }}
 
+    <div class="citas-grid">
+        {% for c in citas %}
+            <div class="cita-card">
+                <strong>Fecha:</strong> {{ c.fecha_cita }}<br>
+                <strong>Hora:</strong> {{ c.hora_cita }}<br>
+                <strong>Nombre Mascota:</strong> {{ c.nombre_mascota }}<br>
+                <strong>Tipo Mascota:</strong> {{ c.tipo_mascota }}<br>
+    
+                <form method="post" style="margin-top: 10px;">
+                    {% csrf_token %}
+                    <input type="hidden" name="cita_id" value="{{ c.id }}">
+                    <button type="submit">Eliminar cita</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+    {% comment %}
         <ul>
             {% for c in citas %}
                 <li>
@@ -25,4 +43,5 @@
                 <hr>
             {% endfor %}
         </ul>
+    {% endcomment %}
 </body>

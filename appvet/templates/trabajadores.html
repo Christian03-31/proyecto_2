@@ -1,13 +1,38 @@
 <head>
     <title>TRABAJADORES</title>
+    <link rel="stylesheet" href="/static/style_revhrtrab.css">
 </head>
 
 <body>
-  <a href="/"><h1>Regresar</h1></a>
+  <a href="/" class="a h1"><h1>Regresar</h1></a>
   <a href="{% url 'logoutT' %}">Salir</a>
   <a href="{% url 'API' %}">API</a>
   <h1>Bienvenido trabajador {{ UserVeterinaria.username }}</h1>
 
+  <h2>Citas disponibles</h2>
+
+<div class="citas-grid">
+  {% for cita in citas %}
+    <div class="cita-card">
+      <strong>Fecha:</strong> {{ cita.fecha_cita }}<br>
+      <strong>Hora:</strong> {{ cita.hora_cita }}<br>
+      <strong>Mascota:</strong> {{ cita.nombre_mascota }} ({{ cita.tipo_mascota }})<br>
+      <strong>Tutor:</strong> {{ cita.nombre_propietario }} - {{ cita.rut_propietario }}<br>
+
+      {% if cita.trabajador_asignado %}
+        <p><strong>Asignada a:</strong> {{ cita.trabajador_asignado.username }}</p>
+      {% else %}
+        <form method="post" style="margin-top: 10px;">
+          {% csrf_token %}
+          <input type="hidden" name="cita_id" value="{{ cita.id }}">
+          <button type="submit">Tomar esta cita</button>
+        </form>
+      {% endif %}
+    </div>
+  {% endfor %}
+</div>
+
+  {% comment %}
   <h2>Citas disponibles</h2>
   <ul>
     {% for cita in citas %}
@@ -30,5 +55,6 @@
       <hr>
     {% endfor %}
   </ul>
+  {% endcomment %}
 </body>
 

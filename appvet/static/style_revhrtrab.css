@@ -1,0 +1,69 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: linear-gradient(to bottom, #5D9997, #BAD9D8); /* calipso a blanco */
+    text-align: center;
+}
+
+/* Botones de navegación */
+a {
+    font-size: 18px;
+    margin: 20px;
+    padding: 10px 20px;
+    background-color: #FFDAC5;
+    color: black;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+/* Título principal */
+h1 {
+    margin-top: 20px;
+}
+
+/* Contenedor de citas en pares */
+.citas-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* solo 2 columnas */
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+/* Tarjeta de cita */
+.cita-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: left;
+}
+
+/* Botón de tomar cita */
+button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+a h1 {
+    font-size: 18px;
+    margin: 20px;
+    padding: 10px 20px;
+    background-color: #FFDAC5;
+    color: black;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+}

@@ -1,5 +1,6 @@
 <head>
     <title>Pedido de Hora</title>
+    <link rel="stylesheet" href="/static/style_pedirhora.css">
 </head>
 
 <Body>
@@ -48,6 +49,12 @@
         <!-- Botón de envío -->
         <button type="submit">Enviar</button>
     </form>
+
+    <script>
+        document.querySelector("form").addEventListener("submit", function(event) {
+            alert("Envío correcto");
+        });
+    </script>
     
     
 </Body>
